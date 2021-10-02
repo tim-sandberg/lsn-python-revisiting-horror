@@ -2,7 +2,7 @@ import os.path
 
 import pygame
 
-import common.Constants
+from common import Constants
 
 # root of this revisiting horror project on the disk
 main_directory = os.path.split(os.path.abspath(__file__))[0].replace("common", "", 1)
@@ -23,7 +23,7 @@ def load_image(file_name):
     """
 
     file_path_name = os.path.join(
-        main_directory, common.Constants.IMAGES_PATH, file_name)
+        main_directory, Constants.IMAGES_PATH, file_name)
 
     try:
         surface = pygame.image.load(file_path_name)
@@ -39,6 +39,11 @@ def load_image(file_name):
 def load_images(*file_names):
     """
     loading animation (multiple images for same sprite)
+
+    index = position number in the list, starting with zero at the first position
+                            0,      1,             2,       3
+    file_names = ["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg"]
+    
     """
     images = []
 
@@ -80,8 +85,27 @@ class DummySound:
     def play(self):
         pass
 
+def load_music(file_name):
+    """
+    Music will just play in the background when you call it to
+    Reference:
+        https://pythonprogramming.net/adding-sounds-music-pygame/
+    """
+    file_name_path = os.path.join(main_directory, Constants.SOUNDS_PATH, file_name)
 
+    if pygame.mixer:
+            # load the background music loop for game            
+            pygame.mixer.music.load(file_name_path)
+
+            pygame.mixer.music.set_volume(.1)
+
+            # If the loops is -1 then the music will repeat indefinitely.
+            pygame.mixer.music.play(-1)
+    
 def load_sound(file_name):
+    """
+    sounds will play at any time you call them to play
+    """
     # if pygame's mixer (sound) functionality isn't available
     # then return an empty DummySound object
     if (pygame.mixer is None):
