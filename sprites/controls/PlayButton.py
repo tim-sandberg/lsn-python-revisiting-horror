@@ -1,11 +1,14 @@
 import pygame
+from sprites.controls.Button import Button
 
-class Button(pygame.sprite.Sprite):
+class PlayButton(pygame.sprite.Sprite):
     """
-    This is a button control
     """
+    # def __init__(self, screen_rectangle):
+    #     super().__init__(screen_rectangle)"""
+    # This is a button control
+    # """
     images = []
-    image = pygame.Surface
     
     def __init__(self, screen_rectangle):
         """
@@ -29,5 +32,3 @@ class Button(pygame.sprite.Sprite):
             self.image = self.images[0]
         else:
             self.image = self.images[1]
-        
-
